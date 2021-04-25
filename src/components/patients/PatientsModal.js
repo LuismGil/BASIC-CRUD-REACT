@@ -29,17 +29,21 @@ if (process.env.NODE_ENV !== 'test') {
   Modal.setAppElement('#root');
 }
 
-const initPatient = {
-  name: '',
-  cpf: '',
-  date: '',
-};
-
-export const PatientsModal = () => {
+export const PatientsModal = ({ clickedPatient }) => {
   const classes = useStyles();
 
+  const initPatient = {
+    name: clickedPatient && clickedPatient.length ? clickedPatient[0].name : '',
+    cpf: clickedPatient && clickedPatient.length ? clickedPatient[0].cpf : '',
+    date:
+      clickedPatient && clickedPatient.length
+        ? moment(clickedPatient[0].date).format('yyyy-MM-dd')
+        : '',
+    id: clickedPatient && clickedPatient.length ? clickedPatient[0]['_id'] : '',
+  };
+
   const { modalOpen, activeUser } = useSelector(state => state.ui);
-  const { activePatient, patients } = useSelector(state => state.patient);
+  const { patients } = useSelector(state => state.patient);
 
   const dispatch = useDispatch();
 
@@ -51,19 +55,33 @@ export const PatientsModal = () => {
 
   const { name, cpf, date } = formValues;
 
-  useEffect(() => {
-    if (activePatient) {
-      setFormValues(activePatient);
-    } else {
-      setFormValues(initPatient);
+  const validateActiveUser = () => {
+    if (activeUser) {
+      const activePatient = patients.filter(
+        patient => patient.cpf === activeUser.cpf
+      );
+
+      return activePatient;
     }
-  }, [activePatient, setFormValues]);
+
+    return false;
+  };
 
   const handleInputChange = ({ target }) => {
-    setFormValues({
-      ...formValues,
-      [target.name]: target.value,
-    });
+    if (clickedPatient && clickedPatient.length) {
+      console.log('UNU');
+      setFormValues({
+        ...formValues.initPatient,
+        ...initPatient,
+        [target.name]: target.value,
+      });
+    } else {
+      console.log('DPD');
+      setFormValues({
+        ...formValues,
+        [target.name]: target.value,
+      });
+    }
   };
 
   const closeModal = () => {
@@ -79,7 +97,7 @@ export const PatientsModal = () => {
       return setNameIsValid(false);
     }
 
-    if (activePatient) {
+    if (clickedPatient) {
       dispatch(patientStartUpdate(formValues));
     } else {
       dispatch(patientStartAddNew(formValues));
@@ -88,20 +106,6 @@ export const PatientsModal = () => {
     setNameIsValid(true);
     closeModal();
   };
-
-  const validateActiveUser = (name, date, cpf) => {
-    if (activeUser) {
-      const activePatient = patients.filter(
-        patient => patient.cpf === activeUser.cpf
-      );
-
-      return activePatient;
-    }
-
-    return false;
-  };
-
-  console.log(validateActiveUser());
 
   return (
     <Modal
@@ -122,7 +126,7 @@ export const PatientsModal = () => {
             label="Nome"
             variant="outlined"
             name="name"
-            value={validateActiveUser() ? validateActiveUser()[0].name : name}
+            defaultValue={initPatient.name}
             onChange={handleInputChange}
           />
           <TextField
@@ -132,7 +136,7 @@ export const PatientsModal = () => {
             label=""
             variant="outlined"
             name="date"
-            value={validateActiveUser() ? validateActiveUser()[0].date : date}
+            defaultValue={initPatient.date}
             onChange={handleInputChange}
           />
           <TextField
@@ -140,7 +144,7 @@ export const PatientsModal = () => {
             label="CPF"
             variant="outlined"
             name="cpf"
-            value={validateActiveUser() ? validateActiveUser()[0].cpf : cpf}
+            defaultValue={initPatient.cpf}
             onChange={handleInputChange}
           />
 

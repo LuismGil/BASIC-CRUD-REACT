@@ -31,7 +31,7 @@ export const PatientsScreen = () => {
   const dispatch = useDispatch();
 
   const { patients, activePatient } = useSelector(state => state.patient);
-  const { modalOpen } = useSelector(state => state.ui);
+  const { modalOpen, activeUser } = useSelector(state => state.ui);
   const { uid } = useSelector(state => state.auth);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const PatientsScreen = () => {
   };
 
   const rows = [];
-  const formatDate = 'DD-MM-YYYY';
+  const formatDate = 'YYYY-MM-DD';
 
   patients.map(patient => {
     rows.push(
@@ -90,7 +90,13 @@ export const PatientsScreen = () => {
 
       {activePatient && <DeletePatientFab />}
 
-      <PatientsModal />
+      <PatientsModal
+        clickedPatient={
+          patients &&
+          activeUser &&
+          patients.filter(patient => patient.cpf === activeUser.cpf)
+        }
+      />
     </div>
   );
 };
