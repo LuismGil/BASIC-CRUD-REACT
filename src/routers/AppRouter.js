@@ -27,9 +27,9 @@ export const AppRouter = () => {
 
   if (checking) {
     return (
-      <div>
-        <div>
-          <div>wait..</div>
+      <div className="loading-spinner">
+        <div className="loading-spinner--item">
+          <div></div>
         </div>
       </div>
     );

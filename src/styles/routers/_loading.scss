@@ -1,0 +1,40 @@
+@keyframes loading-spinner-eclipse {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  background: $white;
+  display: inline-block;
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+
+  &--item {
+    align-items: center;
+    backface-visibility: hidden;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    transform-origin: 0 0;
+    transform: translateZ(0) scale(1);
+    width: 100%;
+
+    div {
+      animation: loading-spinner-eclipse 1s linear infinite;
+      border-radius: 50%;
+      box-sizing: content-box;
+      box-shadow: 0 4px 0 0 $primary;
+      height: 60px;
+      width: 60px;
+    }
+  }
+}

@@ -31,7 +31,7 @@ Que você encontrará nesta lista?
 
 - GET / Auth - Renew JWT
 
-`Revalidar o token de autenticação do usuario (tempo de duração: *02:00 horas*)`
+`Revalidar o token de autenticação do usuario (tempo de duração: 02:00 horas)`
 
 - GET / List - Get Patients
 
