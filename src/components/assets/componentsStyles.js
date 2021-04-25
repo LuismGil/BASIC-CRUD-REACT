@@ -21,9 +21,9 @@ export const useStyles = makeStyles(theme => ({
     width: '300px !important',
   },
   form: {
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     margin: '10px',
   },
   textField: {
@@ -31,8 +31,8 @@ export const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: '5px !important',
-    width: '229px',
     height: '56px',
+    width: '229px',
   },
   navbar: {
     color: 'white',
@@ -41,14 +41,14 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'space-around',
   },
   tableBox: {
-    width: '320px',
     margin: '20% auto',
+    width: '320px',
   },
   table: {
-    textAlign: 'center',
     border: '1px solid black',
-    padding: '5px',
-    margin: '5px',
     height: '30px',
+    margin: '5px',
+    padding: '5px',
+    textAlign: 'center',
   },
 }));

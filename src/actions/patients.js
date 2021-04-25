@@ -9,7 +9,7 @@ export const patientStartAddNew = patient => {
     const { uid, name } = getState().auth;
 
     try {
-      const resp = await fetchWithToken('patients', patient, 'POST');
+      const resp = await fetchWithToken('list', patient, 'POST');
       const body = await resp.json();
 
       console.log(body);
@@ -46,11 +46,7 @@ export const patientClearActivePatient = () => ({
 export const patientStartUpdate = patient => {
   return async dispatch => {
     try {
-      const resp = await fetchWithToken(
-        `patients/${patient.id}`,
-        patient,
-        'PUT'
-      );
+      const resp = await fetchWithToken(`list/${patient.id}`, patient, 'PUT');
       const body = await resp.json();
 
       if (body.ok) {
@@ -73,7 +69,7 @@ export const patientStartDelete = () => {
   return async (dispatch, getState) => {
     const { id } = getState().patient.activePatient;
     try {
-      const resp = await fetchWithToken(`patients/${id}`, {}, 'DELETE');
+      const resp = await fetchWithToken(`list/${id}`, {}, 'DELETE');
       const body = await resp.json();
 
       if (body.ok) {
@@ -94,7 +90,7 @@ const patientDeleted = () => ({
 export const patientStartLoading = () => {
   return async dispatch => {
     try {
-      const resp = await fetchWithToken('patients');
+      const resp = await fetchWithToken('list');
       const body = await resp.json();
 
       const patients = preparePatients(body.patients);

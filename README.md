@@ -1,3 +1,5 @@
+# Doctor App
+
 ## Login Screen
 
 Login test
@@ -18,9 +20,29 @@ Para fazer as solicitações de 'Renew JWT', 'Get Patients', 'Add Patient', 'Upd
 Que você encontrará nesta lista?
 
 - POST / Auth - Create User
+
+Criar um novo usuario
+
 - POST / Auth - Login User
+
+Fazer o login do usuario
+
 - GET / Auth - Renew JWT
+
+Revalidar o token de autenticação do usuario (tempo de duração: `02:00 horas`)
+
 - GET / List - Get Patients
+
+Traz para nosso usuario logado a lista de pacientes
+
 - POST / List - Add Patient
+
+Adicionar um novo paciente
+
 - PUT / List - Update Patient
+
+Actualizar os dados de um paciente
+
 - DELETE / List - Delete Patient
+
+Apagar o registro de um paciente

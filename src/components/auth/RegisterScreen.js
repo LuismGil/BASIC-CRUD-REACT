@@ -13,8 +13,8 @@ import { startRegister } from '../../actions/auth';
 import { Link } from 'react-router-dom';
 
 export const RegisterScreen = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const [formRegisterValues, handleRegisterInputChange] = useForm({
     rName: '',
@@ -44,7 +44,7 @@ export const RegisterScreen = () => {
         text: 'As senhas devem ser iguais',
       });
     }
-    dispatch(startRegister(rEmail, rPassword1, rName, rCPF, rDate));
+    dispatch(startRegister(rName, rEmail, rDate, rCPF, rPassword1));
 
     // if (validateCPF(rCPF)) {
     //   return Swal.fire({
@@ -78,25 +78,6 @@ export const RegisterScreen = () => {
           />
           <TextField
             className={classes.textField}
-            id="dataDeNascimento-id"
-            name="rDate"
-            value={rDate}
-            onChange={handleRegisterInputChange}
-            label="Data de Nascimento"
-            variant="outlined"
-          />
-          <TextField
-            className={classes.textField}
-            id="cpf-id"
-            name="rCPF"
-            value={rCPF}
-            onChange={handleRegisterInputChange}
-            label="CPF"
-            variant="outlined"
-          />
-
-          <TextField
-            className={classes.textField}
             id="emailReg-id"
             name="rEmail"
             value={rEmail}
@@ -104,6 +85,26 @@ export const RegisterScreen = () => {
             label="E-mail"
             variant="outlined"
           />
+          <TextField
+            className={classes.textField}
+            id="dataDeNascimento-id"
+            name="rDate"
+            value={rDate}
+            onChange={handleRegisterInputChange}
+            label="Data de Nascimento: 'YY-MM-DD'"
+            variant="outlined"
+          />
+          <TextField
+            className={classes.textField}
+            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+            id="cpf-id"
+            name="rCPF"
+            value={rCPF}
+            onChange={handleRegisterInputChange}
+            label="CPF: xxx.xxx.xxx-xx"
+            variant="outlined"
+          />
+
           <TextField
             className={classes.textField}
             id="passwordReg-id1"
@@ -119,7 +120,7 @@ export const RegisterScreen = () => {
             name="rPassword2"
             value={rPassword2}
             onChange={handleRegisterInputChange}
-            label="Digite uma senha novamente"
+            label="Digite a senha novamente"
             variant="outlined"
           />
           <Button

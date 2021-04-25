@@ -18,10 +18,10 @@ export const DeletePatientFab = () => {
       className={classes.button}
       variant="contained"
       color="primary"
-      oonClick={handleDelete}
+      onClick={handleDelete}
     >
       <i className="fas fa-trash"></i>
-      <span> Apagar paciente </span>
+      <span> Apagar paciente</span>
     </Button>
   );
 };

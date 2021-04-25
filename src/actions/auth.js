@@ -26,11 +26,11 @@ export const startLogin = (email, password) => {
   };
 };
 
-export const startRegister = (email, password, name, date, cpf) => {
+export const startRegister = (name, email, date, cpf, password) => {
   return async dispatch => {
     const resp = await fetchWithoutToken(
       'auth/new',
-      { email, password, name, date, cpf },
+      { name, email, date, cpf, password },
       'POST'
     );
     const body = await resp.json();

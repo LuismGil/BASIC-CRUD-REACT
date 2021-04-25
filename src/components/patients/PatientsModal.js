@@ -28,10 +28,9 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 const initPatient = {
-  nome: '',
-  CPF: '',
-  dataDeNascimento: '',
-  email: '',
+  name: '',
+  cpf: '',
+  date: '',
 };
 
 export const PatientsModal = () => {
@@ -42,13 +41,13 @@ export const PatientsModal = () => {
 
   const dispatch = useDispatch();
 
-  const [nomeIsValid, setnomeIsValid] = useState(true);
+  const [nameIsValid, setNameIsValid] = useState(true);
 
   const [formValues, setFormValues] = useState({
     initPatient,
   });
 
-  const { nome, CPF, dataDeNascimento, email } = formValues;
+  const { name, cpf, date } = formValues;
 
   useEffect(() => {
     if (activePatient) {
@@ -74,18 +73,17 @@ export const PatientsModal = () => {
   const handleSubmitForm = e => {
     e.preventDefault();
 
-    if (nome.trim().length < 2) {
-      return setnomeIsValid(false);
+    if (name.trim().length < 2) {
+      return setNameIsValid(false);
     }
 
-    //TODO: realizar grabacion
     if (activePatient) {
       dispatch(patientStartUpdate(formValues));
     } else {
       dispatch(patientStartAddNew(formValues));
     }
 
-    setnomeIsValid(true);
+    setNameIsValid(true);
     closeModal();
   };
 
@@ -107,33 +105,24 @@ export const PatientsModal = () => {
             className={classes.textField}
             label="Nome"
             variant="outlined"
-            name="nome"
-            value={nome}
+            name="name"
+            value={name}
             onChange={handleInputChange}
           />
           <TextField
             className={classes.textField}
             label="Data de Nascimento"
             variant="outlined"
-            name="dataDeNascimento"
-            value={dataDeNascimento}
+            name="date"
+            value={date}
             onChange={handleInputChange}
           />
           <TextField
             className={classes.textField}
             label="CPF"
             variant="outlined"
-            name="CPF"
-            value={CPF}
-            onChange={handleInputChange}
-          />
-
-          <TextField
-            className={classes.textField}
-            label="E-mail"
-            variant="outlined"
-            name="email"
-            value={email}
+            name="cpf"
+            value={cpf}
             onChange={handleInputChange}
           />
 
@@ -144,7 +133,7 @@ export const PatientsModal = () => {
             color="primary"
           >
             <i className="far fa-save"></i>
-            <span>Adicionar paciente</span>
+            <span> Adicionar paciente</span>
           </Button>
         </form>
       </Container>

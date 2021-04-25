@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
 
 export const LoginScreen = () => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const [formLoginValues, handleLoginInputChange] = useForm({
