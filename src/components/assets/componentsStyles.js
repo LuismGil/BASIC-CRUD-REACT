@@ -51,4 +51,13 @@ export const useStyles = makeStyles(theme => ({
     padding: '5px',
     textAlign: 'center',
   },
+  cursor: {
+    cursor: 'pointer',
+  },
+  dateField: {
+    flexDirection: 'column-reverse !important',
+    marginBottom: '15px !important',
+    marginTop: '0',
+    width: '100%',
+  },
 }));

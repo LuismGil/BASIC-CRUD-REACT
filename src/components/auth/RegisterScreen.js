@@ -86,13 +86,15 @@ export const RegisterScreen = () => {
             variant="outlined"
           />
           <TextField
-            className={classes.textField}
+            type="date"
+            className={(classes.textField, classes.dateField)}
             id="dataDeNascimento-id"
             name="rDate"
             value={rDate}
             onChange={handleRegisterInputChange}
-            label="Data de Nascimento: 'YY-MM-DD'"
+            label=""
             variant="outlined"
+            helperText="Data de nascimento"
           />
           <TextField
             className={classes.textField}

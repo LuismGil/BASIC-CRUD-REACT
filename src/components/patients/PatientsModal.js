@@ -14,6 +14,8 @@ import {
   patientStartAddNew,
 } from '../../actions/patients';
 
+import moment from 'moment';
+
 const customStyles = {
   content: {
     top: '50%',
@@ -36,8 +38,8 @@ const initPatient = {
 export const PatientsModal = () => {
   const classes = useStyles();
 
-  const { modalOpen } = useSelector(state => state.ui);
-  const { activePatient } = useSelector(state => state.patient);
+  const { modalOpen, activeUser } = useSelector(state => state.ui);
+  const { activePatient, patients } = useSelector(state => state.patient);
 
   const dispatch = useDispatch();
 
@@ -87,9 +89,23 @@ export const PatientsModal = () => {
     closeModal();
   };
 
+  const validateActiveUser = (name, date, cpf) => {
+    if (activeUser) {
+      const activePatient = patients.filter(
+        patient => patient.cpf === activeUser.cpf
+      );
+
+      return activePatient;
+    }
+
+    return false;
+  };
+
+  console.log(validateActiveUser());
+
   return (
     <Modal
-      isOpen={false}
+      isOpen={modalOpen}
       onRequestClose={closeModal}
       style={customStyles}
       closeTimeoutMS={200}
@@ -98,7 +114,7 @@ export const PatientsModal = () => {
       ariaHideApp={!process.env.NODE_ENV === 'test'}
     >
       <Container className={classes.container} maxWidth="sm">
-        <h1> {activePatient ? 'Editar paciente' : 'Novo paciente'} </h1>
+        <h1> {validateActiveUser() ? 'Editar paciente' : 'Novo paciente'} </h1>
         <hr />
         <form className={classes.form} onSubmit={handleSubmitForm}>
           <TextField
@@ -106,15 +122,17 @@ export const PatientsModal = () => {
             label="Nome"
             variant="outlined"
             name="name"
-            value={name}
+            value={validateActiveUser() ? validateActiveUser()[0].name : name}
             onChange={handleInputChange}
           />
           <TextField
-            className={classes.textField}
-            label="Data de Nascimento"
+            type="date"
+            helperText="Data de nascimento"
+            className={(classes.textField, classes.dateField)}
+            label=""
             variant="outlined"
             name="date"
-            value={date}
+            value={validateActiveUser() ? validateActiveUser()[0].date : date}
             onChange={handleInputChange}
           />
           <TextField
@@ -122,7 +140,7 @@ export const PatientsModal = () => {
             label="CPF"
             variant="outlined"
             name="cpf"
-            value={cpf}
+            value={validateActiveUser() ? validateActiveUser()[0].cpf : cpf}
             onChange={handleInputChange}
           />
 

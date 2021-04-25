@@ -31,23 +31,15 @@ export const PatientsScreen = () => {
   const dispatch = useDispatch();
 
   const { patients, activePatient } = useSelector(state => state.patient);
-
+  const { modalOpen } = useSelector(state => state.ui);
   const { uid } = useSelector(state => state.auth);
 
   useEffect(() => {
     dispatch(patientStartLoading());
   }, [dispatch]);
 
-  const onDoubleClick = e => {
-    dispatch(uiOpenModal());
-  };
-
-  const onSelectPatient = e => {
-    dispatch(patientSetActive(e));
-  };
-
-  const onSelectSlot = e => {
-    dispatch(patientClearActivePatient());
+  const onDoubleClick = patient => {
+    dispatch(uiOpenModal(patient));
   };
 
   const createData = (cpf, name, date) => {
@@ -55,7 +47,7 @@ export const PatientsScreen = () => {
   };
 
   const rows = [];
-  const formatDate = 'YYYY-MM-DD';
+  const formatDate = 'DD-MM-YYYY';
 
   patients.map(patient => {
     rows.push(
@@ -80,13 +72,9 @@ export const PatientsScreen = () => {
               <TableCell>Data</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={classes.cursor}>
             {rows.map(row => (
-              <TableRow
-                key={row.cpf}
-                onDoubleClick={onDoubleClick(row)}
-                onClick={onSelectPatient}
-              >
+              <TableRow key={row.cpf} onDoubleClick={() => onDoubleClick(row)}>
                 <TableCell component="th" scope="row">
                   {row.cpf}
                 </TableCell>

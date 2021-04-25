@@ -26,7 +26,13 @@ export const AppRouter = () => {
   }, [dispatch]);
 
   if (checking) {
-    return <h5>Espere...</h5>;
+    return (
+      <div>
+        <div>
+          <div>wait..</div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -39,8 +45,19 @@ export const AppRouter = () => {
             component={LoginScreen}
             isAuthenticated={!!uid}
           />
-          <Route exact path="/register" component={RegisterScreen} />
-          <Route exact path="/patients" component={PatientsScreen} />
+          <PublicRoute
+            exact
+            path="/register"
+            component={RegisterScreen}
+            isAuthenticated={!!uid}
+          />
+
+          <PrivateRoute
+            exact
+            path="/patients"
+            component={PatientsScreen}
+            isAuthenticated={!!uid}
+          />
 
           <PrivateRoute
             exact
@@ -48,7 +65,7 @@ export const AppRouter = () => {
             component={PatientsScreen}
             isAuthenticated={!!uid}
           />
-          <Redirect to="/" />
+          <Redirect to="/login" />
         </Switch>
       </div>
     </Router>
