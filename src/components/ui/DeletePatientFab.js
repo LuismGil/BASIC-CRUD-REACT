@@ -13,6 +13,7 @@ export const DeletePatientFab = ({ clickedPatient }) => {
   const handleDelete = () => {
     dispatch(patientStartDelete(clickedPatient[0]));
     dispatch(uiCloseModal());
+    window.location.reload();
   };
 
   return (
@@ -22,7 +23,7 @@ export const DeletePatientFab = ({ clickedPatient }) => {
       color="primary"
       onClick={handleDelete}
     >
-      <i className="fas fa-trash"></i>
+      <i className="fas fa-trash mr"></i>
       <span> Apagar paciente</span>
     </Button>
   );

@@ -26,37 +26,41 @@ export const LoginScreen = () => {
   };
 
   return (
-    <Container className={classes.container} maxWidth="sm">
-      <h3 className={classes.title}>Fazer login</h3>
-      <form className={classes.form} onSubmit={handleLogin}>
-        <TextField
-          className={classes.textField}
-          id="email-id"
-          name="lEmail"
-          value={lEmail}
-          onChange={handleLoginInputChange}
-          label="E-mail"
-          variant="outlined"
-        />
-        <TextField
-          className={classes.textField}
-          id="password-id"
-          name="lPassword"
-          value={lPassword}
-          onChange={handleLoginInputChange}
-          label="Senha"
-          variant="outlined"
-        />
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          type="submit"
-        >
-          Acessar
-        </Button>
-        <Link to="/register">Criar novo usuario</Link>
-      </form>
-    </Container>
+    <div className="container">
+      <Container className={classes.container} maxWidth="sm">
+        <h3 className={classes.title}>Fazer login</h3>
+        <form className={classes.form} onSubmit={handleLogin}>
+          <TextField
+            className={classes.textField}
+            id="email-id"
+            name="lEmail"
+            value={lEmail}
+            onChange={handleLoginInputChange}
+            label="E-mail"
+            variant="outlined"
+          />
+          <TextField
+            className={classes.textField}
+            id="password-id"
+            name="lPassword"
+            value={lPassword}
+            onChange={handleLoginInputChange}
+            label="Senha"
+            variant="outlined"
+          />
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Acessar
+          </Button>
+          <Link className="link" to="/register">
+            Criar novo usuario
+          </Link>
+        </form>
+      </Container>
+    </div>
   );
 };

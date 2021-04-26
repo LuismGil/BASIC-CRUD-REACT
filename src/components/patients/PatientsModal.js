@@ -96,6 +96,7 @@ export const PatientsModal = ({ clickedPatient }) => {
 
     if (clickedPatient) {
       dispatch(patientStartUpdate(formValues));
+      window.location.reload();
     } else {
       dispatch(patientStartAddNew(formValues));
     }
@@ -151,7 +152,7 @@ export const PatientsModal = ({ clickedPatient }) => {
             variant="contained"
             color="primary"
           >
-            <i className="far fa-save"></i>
+            <i className="far fa-save mr"></i>
             <span>{clickedPatient ? 'Salvar' : 'Adicionar paciente'}</span>
           </Button>
           {clickedPatient ? (

@@ -17,7 +17,7 @@ export const Navbar = () => {
   return (
     <div>
       <AppBar className={classes.navbar} position="static">
-        <span>Doctor: {name}</span>
+        <span className="navbar__span">Doctor: {name}</span>
         <Button onClick={handleLogout} color="inherit">
           <i className="fas fa-sign-out-alt"> Sair</i>
         </Button>

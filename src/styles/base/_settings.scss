@@ -1,5 +1,7 @@
 // Colors
 
-$primary: #5c62c5;
-$white: #fff;
-$black: #000;
+$color-primary: #5c62c5;
+$color-white: #fff;
+$color-black: #000;
+$color-alert: #ff1111;
+$color-background: mix($color-white, $color-primary, 65%) !default;

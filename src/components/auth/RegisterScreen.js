@@ -133,7 +133,9 @@ export const RegisterScreen = () => {
           >
             Finalizar Cadastro
           </Button>
-          <Link to="/login">Already registered?</Link>
+          <Link className="link" to="/login">
+            Tem cadastro?
+          </Link>
         </form>
       </Container>
     </>

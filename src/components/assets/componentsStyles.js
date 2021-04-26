@@ -12,12 +12,12 @@ export const useStyles = makeStyles(theme => ({
     margin: '15px',
     textAlign: 'center',
   },
-  description: {
-    color: 'green',
-  },
   container: {
+    backgroundColor: 'white',
     border: '1px solid black',
-    margin: '20% auto',
+    boxShadow: '0 2px 10px 4px #5014ff45',
+    display: 'flex',
+    flexDirection: 'column',
     width: '300px !important',
   },
   form: {
@@ -28,6 +28,7 @@ export const useStyles = makeStyles(theme => ({
   },
   textField: {
     marginBottom: '15px !important',
+    width: '100%',
   },
   button: {
     margin: '5px !important',
@@ -39,17 +40,7 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'row !important',
     justifyContent: 'space-around',
-  },
-  tableBox: {
-    margin: '20% auto',
-    width: '320px',
-  },
-  table: {
-    border: '1px solid black',
-    height: '30px',
-    margin: '5px',
-    padding: '5px',
-    textAlign: 'center',
+    padding: '10px 0',
   },
   cursor: {
     cursor: 'pointer',
