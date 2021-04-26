@@ -8,6 +8,8 @@ Após o registro, o médico só precisará fazer o login com seu e-mail e senha.
 
 **OBS:** O médico só pode estar ativo dentro da aplicação por duas horas de cada vez, depois disso ele terá que entrar novamente no sistema.
 
+Para realizar seus testes desta aplicação, você pode entrar no [Doctor App](https://crud-doctorapp.herokuapp.com/)
+
 ## Instruções para sua instalação local
 
 O usuário que quiser usar este projeto, basta fazer um Git clone do repositorio, e uma vez baixado só entrar no seu IDE de preferencia e fazer um `npm install` para baixar os pacotes de Node.
@@ -68,6 +70,10 @@ Que você encontrará nesta lista?
 - DELETE / List - Delete Patient
 
 `Apagar o registro de um paciente`
+
+## Backend 
+
+Para acessar o backend você pode ir para o seguinte [repositorio](https://github.com/LuismGil/crud-backend)
 
 ## Tecnologias utilizadas para este projeto
 
