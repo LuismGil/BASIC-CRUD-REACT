@@ -12,15 +12,12 @@ export const patientStartAddNew = patient => {
       const resp = await fetchWithToken('list', patient, 'POST');
       const body = await resp.json();
 
-      console.log(body);
-
       if (body.ok) {
         patient.id = body.patient.id;
         patient.user = {
           _id: uid,
           name: name,
         };
-        console.log(patient);
         dispatch(patientAddNew(patient));
       }
     } catch (error) {
@@ -65,15 +62,14 @@ const patientUpdated = patient => ({
   payload: patient,
 });
 
-export const patientStartDelete = () => {
-  return async (dispatch, getState) => {
-    const { id } = getState().patient.activePatient;
+export const patientStartDelete = patient => {
+  return async dispatch => {
     try {
-      const resp = await fetchWithToken(`list/${id}`, {}, 'DELETE');
+      const resp = await fetchWithToken(`list/${patient['_id']}`, {}, 'DELETE');
       const body = await resp.json();
 
       if (body.ok) {
-        dispatch(patientDeleted());
+        dispatch(patientDeleted(patient));
       } else {
         Swal.fire('Error', body.msg, 'error');
       }
@@ -83,8 +79,9 @@ export const patientStartDelete = () => {
   };
 };
 
-const patientDeleted = () => ({
+const patientDeleted = patient => ({
   type: types.patientDeleted,
+  payload: patient,
 });
 
 export const patientStartLoading = () => {

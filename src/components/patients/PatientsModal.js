@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import Modal from 'react-modal';
-import { uiCloseModal } from '../../actions/ui';
-
-import { useStyles } from '../assets/componentsStyles';
+import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
+
+import { uiCloseModal } from '../../actions/ui';
+import { useStyles } from '../assets/componentsStyles';
 import {
   patientClearActivePatient,
   patientStartUpdate,
   patientStartAddNew,
 } from '../../actions/patients';
-
-import moment from 'moment';
+import { DeletePatientFab } from '../ui/DeletePatientFab';
 
 const customStyles = {
   content: {
@@ -37,7 +36,7 @@ export const PatientsModal = ({ clickedPatient }) => {
     cpf: clickedPatient && clickedPatient.length ? clickedPatient[0].cpf : '',
     date:
       clickedPatient && clickedPatient.length
-        ? moment(clickedPatient[0].date).format('yyyy-MM-dd')
+        ? moment(clickedPatient[0].date).format('YYYY-MM-DD')
         : '',
     id: clickedPatient && clickedPatient.length ? clickedPatient[0]['_id'] : '',
   };
@@ -53,7 +52,7 @@ export const PatientsModal = ({ clickedPatient }) => {
     initPatient,
   });
 
-  const { name, cpf, date } = formValues;
+  const { name } = formValues;
 
   const validateActiveUser = () => {
     if (activeUser) {
@@ -69,14 +68,12 @@ export const PatientsModal = ({ clickedPatient }) => {
 
   const handleInputChange = ({ target }) => {
     if (clickedPatient && clickedPatient.length) {
-      console.log('UNU');
       setFormValues({
         ...formValues.initPatient,
         ...initPatient,
         [target.name]: target.value,
       });
     } else {
-      console.log('DPD');
       setFormValues({
         ...formValues,
         [target.name]: target.value,
@@ -155,8 +152,13 @@ export const PatientsModal = ({ clickedPatient }) => {
             color="primary"
           >
             <i className="far fa-save"></i>
-            <span> Adicionar paciente</span>
+            <span>{clickedPatient ? 'Salvar' : 'Adicionar paciente'}</span>
           </Button>
+          {clickedPatient ? (
+            <DeletePatientFab clickedPatient={clickedPatient} />
+          ) : (
+            ''
+          )}
         </form>
       </Container>
     </Modal>

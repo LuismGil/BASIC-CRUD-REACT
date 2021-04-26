@@ -1,14 +1,12 @@
+import Swal from 'sweetalert2';
 import { fetchWithToken, fetchWithoutToken } from '../helpers/fetch';
 import { types } from '../types/types';
-import Swal from 'sweetalert2';
 import { patientLogout } from './patients';
 
 export const startLogin = (email, password) => {
   return async dispatch => {
     const resp = await fetchWithoutToken('auth', { email, password }, 'POST');
     const body = await resp.json();
-
-    console.log('bbody', body);
 
     if (body.ok) {
       localStorage.setItem('token', body.token);

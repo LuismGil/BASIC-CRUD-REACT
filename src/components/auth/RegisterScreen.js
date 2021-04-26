@@ -1,16 +1,15 @@
 import React from 'react';
-
 import { useDispatch } from 'react-redux';
-import { useForm } from '../../hooks/useForm';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
-import { useStyles } from '../assets/componentsStyles';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
-// import { validateCPF } from '../../helpers/validateCPF';
+
+import { useForm } from '../../hooks/useForm';
 import { startRegister } from '../../actions/auth';
-import { Link } from 'react-router-dom';
+// import { validateCPF } from '../../helpers/validateCPF';
+import { useStyles } from '../assets/componentsStyles';
 
 export const RegisterScreen = () => {
   const dispatch = useDispatch();

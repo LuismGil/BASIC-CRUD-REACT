@@ -36,7 +36,7 @@ export const patientReducer = (state = initialState, action) => {
     case types.patientDeleted:
       return {
         ...state,
-        patients: state.patients.filter(e => e.id !== state.activePatient.id),
+        patients: state.patients.filter(e => e.id !== action.payload['_id']),
         activePatient: null,
       };
 

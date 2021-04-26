@@ -1,22 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-
-import { PatientsModal } from './PatientsModal';
-
-import { uiOpenModal } from '../../actions/ui';
-
-import { useStyles } from '../assets/componentsStyles';
-
-import {
-  patientClearActivePatient,
-  patientSetActive,
-  patientStartLoading,
-} from '../../actions/patients';
-import { AddNewFab } from '../ui/AddNewFab';
-import { DeletePatientFab } from '../ui/DeletePatientFab';
-import { Navbar } from '../ui/Navbar';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -25,14 +9,20 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import { PatientsModal } from './PatientsModal';
+import { uiOpenModal } from '../../actions/ui';
+import { useStyles } from '../assets/componentsStyles';
+import { patientStartLoading } from '../../actions/patients';
+import { AddNewFab } from '../ui/AddNewFab';
+import { Navbar } from '../ui/Navbar';
+
 export const PatientsScreen = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  const { patients, activePatient } = useSelector(state => state.patient);
-  const { modalOpen, activeUser } = useSelector(state => state.ui);
-  const { uid } = useSelector(state => state.auth);
+  const { patients } = useSelector(state => state.patient);
+  const { activeUser } = useSelector(state => state.ui);
 
   useEffect(() => {
     dispatch(patientStartLoading());
@@ -72,6 +62,7 @@ export const PatientsScreen = () => {
               <TableCell>Data</TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody className={classes.cursor}>
             {rows.map(row => (
               <TableRow key={row.cpf} onDoubleClick={() => onDoubleClick(row)}>
@@ -87,8 +78,6 @@ export const PatientsScreen = () => {
       </TableContainer>
 
       <AddNewFab />
-
-      {activePatient && <DeletePatientFab />}
 
       <PatientsModal
         clickedPatient={

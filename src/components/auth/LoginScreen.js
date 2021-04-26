@@ -1,16 +1,13 @@
 import React from 'react';
-
-import { useForm } from '../../hooks/useForm';
 import { useDispatch } from 'react-redux';
-import { startLogin } from '../../actions/auth';
-
-import Swal from 'sweetalert2';
-
-import { useStyles } from '../assets/componentsStyles';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
-import { Link } from 'react-router-dom';
+
+import { useForm } from '../../hooks/useForm';
+import { startLogin } from '../../actions/auth';
+import { useStyles } from '../assets/componentsStyles';
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();

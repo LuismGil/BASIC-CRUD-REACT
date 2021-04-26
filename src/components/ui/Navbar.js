@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startLogout } from '../../actions/auth';
-
-import { useStyles } from '../assets/componentsStyles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+
+import { startLogout } from '../../actions/auth';
+import { useStyles } from '../assets/componentsStyles';
 
 export const Navbar = () => {
   const classes = useStyles();

@@ -1,18 +1,10 @@
 import React, { useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
-
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-
 import { LoginScreen } from '../components/auth/LoginScreen';
-
 import { PatientsScreen } from '../components/patients/PatientsScreen';
 import { startChecking } from '../actions/auth';
 import { RegisterScreen } from '../components/auth/RegisterScreen';

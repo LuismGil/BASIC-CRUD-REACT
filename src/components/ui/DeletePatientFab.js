@@ -1,16 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { patientStartDelete } from '../../actions/patients';
-
-import { useStyles } from '../assets/componentsStyles';
 import Button from '@material-ui/core/Button';
 
-export const DeletePatientFab = () => {
+import { patientStartDelete } from '../../actions/patients';
+import { useStyles } from '../assets/componentsStyles';
+import { uiCloseModal } from '../../actions/ui';
+
+export const DeletePatientFab = ({ clickedPatient }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(patientStartDelete());
+    dispatch(patientStartDelete(clickedPatient[0]));
+    dispatch(uiCloseModal());
   };
 
   return (
