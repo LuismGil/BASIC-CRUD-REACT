@@ -14,6 +14,8 @@ import {
   patientStartAddNew,
 } from '../../actions/patients';
 import { DeletePatientFab } from '../ui/DeletePatientFab';
+import { validateCPF } from '../../helpers/validateCPF';
+import Swal from 'sweetalert2';
 
 const customStyles = {
   content: {
@@ -92,6 +94,16 @@ export const PatientsModal = ({ clickedPatient }) => {
 
     if (name.trim().length < 2) {
       return setNameIsValid(false);
+    }
+
+    if (validateCPF(initPatient.cpf)) {
+      return initPatient.cpf;
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'CPF não existe',
+      });
     }
 
     if (clickedPatient) {

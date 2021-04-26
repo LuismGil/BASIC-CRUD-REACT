@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 
 import { useForm } from '../../hooks/useForm';
 import { startRegister } from '../../actions/auth';
-// import { validateCPF } from '../../helpers/validateCPF';
+import { validateCPF } from '../../helpers/validateCPF';
 import { useStyles } from '../assets/componentsStyles';
 
 export const RegisterScreen = () => {
@@ -43,22 +43,18 @@ export const RegisterScreen = () => {
         text: 'As senhas devem ser iguais',
       });
     }
+
+    if (validateCPF(rCPF)) {
+      return rCPF;
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'CPF não existe',
+      });
+    }
+
     dispatch(startRegister(rName, rEmail, rDate, rCPF, rPassword1));
-
-    // if (validateCPF(rCPF)) {
-    //   return Swal.fire({
-    //     icon: 'error',
-    //     title: 'Error',
-    //     text: 'CPF não existe',
-    //   });
-    // }
-
-    // const customValidateForm = () => {
-    //   if (rPassword1 != rPassword2 && !validateCPF(rCPF)) {
-    //     return true;
-    //   }
-
-    //   return false;
   };
 
   return (
