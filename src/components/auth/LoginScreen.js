@@ -31,6 +31,7 @@ export const LoginScreen = () => {
         <h3 className={classes.title}>Fazer login</h3>
         <form className={classes.form} onSubmit={handleLogin}>
           <TextField
+            type="email"
             className={classes.textField}
             id="email-id"
             name="lEmail"
@@ -40,6 +41,7 @@ export const LoginScreen = () => {
             variant="outlined"
           />
           <TextField
+            type="password"
             className={classes.textField}
             id="password-id"
             name="lPassword"

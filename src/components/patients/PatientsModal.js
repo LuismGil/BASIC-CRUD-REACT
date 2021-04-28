@@ -5,6 +5,7 @@ import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
+import Swal from 'sweetalert2';
 
 import { uiCloseModal } from '../../actions/ui';
 import { useStyles } from '../assets/componentsStyles';
@@ -15,7 +16,7 @@ import {
 } from '../../actions/patients';
 import { DeletePatientFab } from '../ui/DeletePatientFab';
 import { validateCPF } from '../../helpers/validateCPF';
-import Swal from 'sweetalert2';
+import { formatCPF } from '../../helpers/formatCPF';
 
 const customStyles = {
   content: {
@@ -68,19 +69,17 @@ export const PatientsModal = ({ clickedPatient }) => {
     return false;
   };
 
+  const formatFormValues = (clicked, target) => {
+    setFormValues({
+      ...(clicked ? formValues.initPatient : formValues),
+      ...(clicked && initPatient),
+      [target.name]:
+        target.name === 'cpf' ? formatCPF(target.value) : target.value,
+    });
+  };
+
   const handleInputChange = ({ target }) => {
-    if (clickedPatient && clickedPatient.length) {
-      setFormValues({
-        ...formValues.initPatient,
-        ...initPatient,
-        [target.name]: target.value,
-      });
-    } else {
-      setFormValues({
-        ...formValues,
-        [target.name]: target.value,
-      });
-    }
+    formatFormValues(clickedPatient && clickedPatient.length, target);
   };
 
   const closeModal = () => {
@@ -132,6 +131,7 @@ export const PatientsModal = ({ clickedPatient }) => {
         <hr />
         <form className={classes.form} onSubmit={handleSubmitForm}>
           <TextField
+            required={true}
             className={classes.textField}
             label="Nome"
             variant="outlined"
@@ -140,6 +140,7 @@ export const PatientsModal = ({ clickedPatient }) => {
             onChange={handleInputChange}
           />
           <TextField
+            required={true}
             type="date"
             helperText="Data de nascimento"
             className={(classes.textField, classes.dateField)}
@@ -150,6 +151,9 @@ export const PatientsModal = ({ clickedPatient }) => {
             onChange={handleInputChange}
           />
           <TextField
+            id="cpf-id"
+            required={true}
+            placeholder="Ex.: 000.000.000-00"
             className={classes.textField}
             label="CPF"
             variant="outlined"

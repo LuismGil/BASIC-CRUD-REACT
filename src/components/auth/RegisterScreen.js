@@ -63,6 +63,7 @@ export const RegisterScreen = () => {
         <h3 className={classes.title}>Cadastra-se</h3>
         <form className={classes.form} onSubmit={handleRegister}>
           <TextField
+            required={true}
             className={classes.textField}
             id="nome-id"
             name="rName"
@@ -72,6 +73,8 @@ export const RegisterScreen = () => {
             variant="outlined"
           />
           <TextField
+            required={true}
+            type="email"
             className={classes.textField}
             id="emailReg-id"
             name="rEmail"
@@ -81,6 +84,7 @@ export const RegisterScreen = () => {
             variant="outlined"
           />
           <TextField
+            required={true}
             type="date"
             className={(classes.textField, classes.dateField)}
             id="dataDeNascimento-id"
@@ -92,17 +96,22 @@ export const RegisterScreen = () => {
             helperText="Data de nascimento"
           />
           <TextField
+            required={true}
+            type="text"
+            placeholder="Ex.: 000.000.000-00"
+            autoComplete="off"
             className={classes.textField}
-            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
             id="cpf-id"
             name="rCPF"
             value={rCPF}
             onChange={handleRegisterInputChange}
-            label="CPF: xxx.xxx.xxx-xx"
+            label="CPF"
             variant="outlined"
           />
 
           <TextField
+            required={true}
+            type="password"
             className={classes.textField}
             id="passwordReg-id1"
             name="rPassword1"
@@ -112,6 +121,8 @@ export const RegisterScreen = () => {
             variant="outlined"
           />
           <TextField
+            required={true}
+            type="password"
             className={classes.textField}
             id="passwordReg-id2"
             name="rPassword2"
@@ -125,7 +136,6 @@ export const RegisterScreen = () => {
             className={classes.button}
             variant="contained"
             color="primary"
-            // disabled={customValidateForm}
           >
             Finalizar Cadastro
           </Button>
